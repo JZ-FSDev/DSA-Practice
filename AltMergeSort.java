@@ -1,7 +1,7 @@
 public class AltMergeSort {
 
     /** The size of the array to be generated for sorting. */
-    private final static int ARRAY_SIZE = 160;
+    private final static int ARRAY_SIZE = 16;
     /**
      * The maximum value of any of the elements in the array to be generated for
      * sorting.
@@ -105,68 +105,25 @@ public class AltMergeSort {
      * @param hi    The index of the last element in the array.
      * @param temp  The int array to contain the fully sorted final array.
      */
-    public static void merge(int[] array, int lo, int mid1, int mid2, int mid3, int hi, int[] temp) {
-        int a = lo, b = mid1 + 1, c = mid2 + 1, d = mid3 + 1;
-        int pos = lo;
-        while (pos <= hi) {
-            int min = -1;
-            boolean aPast = false, bPast = false, cPast = false, dPast = false;
-            if (a > mid1 || hi <= lo)
-                aPast = true;
-            if (b > mid2 || hi <= lo)
-                bPast = true;
-            if (c > mid3 || hi <= lo)
-                cPast = true;
-            if (d > hi || hi <= lo)
-                dPast = true;
+    public static void merge(Integer[] array, int lo, int mid1, int mid2, int mid3, int hi, Integer[] temp) {
+        int i = lo, j = mid1, k = mid2, l = mid3, m = lo;
+        while ((i < mid1) && (j < mid2) && (k < mid3) && (l < hi)){
+            if (array[i].compareTo(array[j]) < 0){
+                if (array[i].compareTo(array[k]) < 0)
+                    temp[l++] = array[i++];
+                    if (array.[i].compareTo(array[l]) < 0){
 
-            if (!aPast && !bPast && !cPast && !dPast) {
-                min = Math.min(Math.min(Math.min(array[a], array[b]), array[c]), array[d]);
-            } else if (aPast && bPast && cPast) {
-                min = array[d];
-            } else if (aPast && bPast && dPast) {
-                min = array[c];
-            } else if (aPast && cPast && dPast) {
-                min = array[b];
-            } else if (bPast && cPast && dPast) {
-                min = array[a];
-            } else if (aPast && bPast) {
-                min = Math.min(array[c], array[d]);
-            } else if (aPast && cPast) {
-                min = Math.min(array[b], array[d]);
-            } else if (aPast && dPast) {
-                min = Math.min(array[b], array[c]);
-            } else if (bPast && cPast) {
-                min = Math.min(array[a], array[d]);
-            } else if (bPast && dPast) {
-                min = Math.min(array[a], array[c]);
-            } else if (cPast && dPast) {
-                min = Math.min(array[a], array[b]);
-            } else if (aPast) {
-                min = Math.min(Math.min(array[b], array[c]), array[d]);
-            } else if (bPast) {
-                min = Math.min(Math.min(array[a], array[c]), array[d]);
-            } else if (cPast) {
-                min = Math.min(Math.min(array[a], array[b]), array[d]);
-            } else if (dPast) {
-                min = Math.min(Math.min(array[a], array[b]), array[c]);
+                    }
+                else
+                    destArray[l++] = gArray[k++];
             }
-
-            // System.out.println("lo: " + lo + " " + "hi: " + hi + " " + min);
-
-            if (min == array[a] && a < mid1 + 1) {
-                a++;
-            } else if (min == array[b] && b < mid2 + 1) {
-                b++;
-            } else if (min == array[c] && c < mid3 + 1) {
-                c++;
-            } else if (min == array[d] && d < hi + 1) {
-                d++;
+            else
+            {
+                if (gArray[j].compareTo(gArray[k]) < 0)
+                    destArray[l++] = gArray[j++];
+                else
+                    destArray[l++] = gArray[k++];
             }
-            temp[pos++] = min;
-        }
-        for (int i = 0; i < array.length; i++) {
-            array[i] = temp[i];
         }
     }
 
@@ -182,19 +139,15 @@ public class AltMergeSort {
     }
 
     private static void altMergeSort(int[] array, int lo, int mid1, int mid2, int mid3, int hi, int[] temp) {
-        int n1 = mid1 - lo + 1;
-        int n2 = mid2 - mid1 + 1;
-        int n3 = mid3 - mid2 + 1;
-        int n4 = hi - mid3 + 1;
+        int n = (hi - lo)/4 + 1;
         if (4 <= hi - lo) {
-            altMergeSort(array, lo, lo + n1 / 4 - 1, lo + 2 * n1 / 4 - 1, lo + 3 * n1 / 4 - 1, mid1, temp);
-            altMergeSort(array, mid1 + 1, lo + n2 / 4 - 1, lo + 2 * n2 / 4 - 1, lo + 3 * n2 / 4 - 1, mid2, temp);
-            altMergeSort(array, mid2 + 1, lo + n3 / 4 - 1, lo + 2 * n3 / 4 - 1, lo + 3 * n3 / 4 - 1, mid3, temp);
-            altMergeSort(array, mid3 + 1, lo + n4 / 4 - 1, lo + 2 * n4 / 4 - 1, lo + 3 * n4 / 4 - 1, hi, temp);
+            altMergeSort(array, lo, lo + n / 4 - 1, lo + 2 * n / 4 - 1, lo + 3 * n / 4 - 1, mid1, temp);
+            altMergeSort(array, mid1 + 1, mid1 + n / 4 - 1, mid1 + 2 * n / 4 - 1, mid1 + 3 * n / 4 - 1, mid2, temp);
+            altMergeSort(array, mid2 + 1, mid2 + n / 4 - 1, mid2 + 2 * n / 4 - 1, mid2 + 3 * n / 4 - 1, mid3, temp);
+            altMergeSort(array, mid3 + 1, mid3 + n / 4 - 1, mid3 + 2 * n / 4 - 1, mid3 + 3 * n / 4 - 1, hi, temp);
             merge(array, lo, mid1, mid2, mid3, hi, temp);
-        } else {
-            int[] temp2 = new int[array.length];
-            mergeSort(array, lo, hi, temp2);
+        }else{
+            merge(array, lo, mid1, mid2, mid3, hi, temp);
         }
     }
 
