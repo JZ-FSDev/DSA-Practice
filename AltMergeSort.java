@@ -1,3 +1,11 @@
+/**
+ * Defines a driver class to compare a self-made alternate version of a merge sort that divides
+ * a given array into four partitions rather than the standard two in the regular merge sort.
+ *
+ * @author JZ-FSDev
+ * @since 17.0.1
+ * @version 0.0.1
+ */
 public class AltMergeSort {
 
     /** The size of the array to be generated for sorting. */
