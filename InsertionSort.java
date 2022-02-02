@@ -1,3 +1,11 @@
+/**
+ * Defines a driver class to compare a self-made recursive insertion sort to 
+ * the interative version to determine which is quicker
+ *
+ * @author JZ-FSDev
+ * @since 17.0.1
+ * @version 0.0.1
+ */
 public class InsertionSort{
     
     /** The size of the array to be generated for sorting. */
@@ -111,9 +119,7 @@ public class InsertionSort{
      * @param pos The position of the element to be sifted to the correct sorted position.
      */
     public static void recursiveInsertionSort(int[] array, int pos){
-        if(pos == -1){
-            return;
-        }else{
+        if(pos > -1){
             siftUp(array, pos); // sift up the item at position i
             recursiveInsertionSort(array, --pos);
         }
