@@ -89,7 +89,7 @@ public class InsertionSort{
      */
     public static boolean isSorted(int[] array){
         boolean sorted = true;
-        for(int i = 0; i < array.length-1; i++){
+        for(int i = 0; i < array.length-1 && sorted; i++){
             if(array[i] > array[i+1]){
                 sorted  = false;
             }
