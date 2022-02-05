@@ -1,3 +1,5 @@
+import java.lang.StringBuilder;
+
 /**
  * Defines a driver class to compare a self-made recursive insertion sort to 
  * the interative version to determine which is quicker
@@ -64,21 +66,24 @@ public class InsertionSort{
      * @return The String representation of the int array.
      */
     public static String arrayToString(int[] array){
-        String s = "";
+        StringBuilder stringBuilder = new StringBuilder();
         if(array.length <= 20){
             for(int i = 0; i < array.length; i++){
-                s += array[i] + " ";
+                stringBuilder.append(array[i]);
+                stringBuilder.append(" ");
             }
         }else{
             for(int i = 0; i < 10; i++){
-                s += array[i] + " ";
+                stringBuilder.append(array[i]);
+                stringBuilder.append(" ");
             }
-            s += ". . . ";
+            stringBuilder.append(". . . ");
             for(int i = array.length - 10; i < array.length; i++){
-                s += array[i] + " ";
+                stringBuilder.append(array[i]);
+                stringBuilder.append(" ");
             }
         }
-        return s;
+        return stringBuilder.toString();
     }
 
     /**
@@ -87,7 +92,7 @@ public class InsertionSort{
      * @param array The int array to be checked.
      * @return Returns true if the int arrray is sorted in ascending order.
      */
-    public static boolean isSorted(int[] array){
+    private static boolean isSorted(int[] array){
         boolean sorted = true;
         for(int i = 0; i < array.length-1 && sorted; i++){
             if(array[i] > array[i+1]){
@@ -98,7 +103,7 @@ public class InsertionSort{
     }
 
     /**
-     * Driver method to recursively sort by insertion the specified int array.
+     * Calls the private helper method to recursively sort by insertion the specified int array.
      * Prints out the time elapsed.
      * 
      * @param array The int array to be recursively sorted.
@@ -118,9 +123,9 @@ public class InsertionSort{
      * @param array The int array to be recursively sorted.
      * @param pos The position of the element to be sifted to the correct sorted position.
      */
-    public static void recursiveInsertionSort(int[] array, int pos){
+    private static void recursiveInsertionSort(int[] array, int pos){
         if(pos > -1){
-            siftUp(array, pos); // sift up the item at position i
+            siftUp(array, pos);
             recursiveInsertionSort(array, --pos);
         }
     }
@@ -132,12 +137,12 @@ public class InsertionSort{
      */
     public static void iterativeInsertionSort( int[] a ){
         long startTime = System.nanoTime();
-        for ( int i = a.length-2; i >= 0; i-- ){// The sorted part is in positions i+1 to a.length-1.
-            siftUp( a, i ); // sift up the item at position i
-        } // end for
+        for ( int i = a.length-2; i >= 0; i-- ){
+            siftUp( a, i );
+        }
         long endTime = System.nanoTime();
         System.out.println("Iterative insertion sort time elapsed: " + (endTime - startTime) + " nanoseconds");
-    } // end iterativeInsertionSort
+    }
 
     /**
      * Interatively sorts by insertion the specified int array.
@@ -146,14 +151,11 @@ public class InsertionSort{
      * @param pos The position of the element to be sifted to the correct sorted position.
      */
     private static void siftUp( int[] a, int pos ) {
-        int siftItem = a[pos]; // remember the item we’re sifting up
-        int i; // loop index is needed after the loop
-        // Move one position to the left all items that are < siftItem
-        // (leaves a "hole" where siftItem belongs).
+        int siftItem = a[pos];
+        int i;
         for ( i = pos+1; i < a.length && a[i] < siftItem ; i++ ) {
             a[i-1] = a[i];
-        } // end for
-            // Put siftItem into the hole (its correct sorted position)
+        }
             a[i-1] = siftItem;
-    } // end siftUp
+    }
 }
