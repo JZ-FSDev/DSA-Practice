@@ -42,5 +42,24 @@ public class QuickSort {
         a[start] = a[bigStart - 1];
         a[bigStart - 1] = pivot;
         return bigStart - 1;
+    }
+    
+    private static int medianOfThree(int[] array, int a, int b, int c){
+        int median = 0;
+        if(a == b && b != c){
+            median = a;
+        }else if(c == b && b != a){
+            median = c;
+        }
+        int max = Math.max(Math.max(array[a],array[b]),array[c]);
+        int min = Math.min(Math.min(array[a],array[b]),array[c]);
+        if(a < max && a > min){
+            median = a;
+        }else if(b < max && b > min){
+            median = b;
+        }else if(c < max && c > min){
+            median = c;
+        }
+        return median;
     }    
 }
