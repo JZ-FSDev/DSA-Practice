@@ -18,4 +18,12 @@ public class QuickSort {
             }
         }
     }
+    
+    private static void choosePivot(int[] a, int start, int end){
+        int mid = (end-start)/2;
+        int pivot = medianOfThree(a, start, mid, end-1);
+        int pivotSwap = a[pivot];
+        a[pivot] = a[start];
+        a[start] = pivotSwap;
+    }    
 }
