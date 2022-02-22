@@ -15,7 +15,7 @@ public class QuickSort {
      * @param array The int array to be recursively quick sorted.
      */    
     public static void quickSort(int[] array){
-        quickSort(a, 0, a.length);
+        quickSort(array, 0, array.length);
     }
 
     /**
@@ -27,16 +27,17 @@ public class QuickSort {
      * @param end The end index (not inclusive) of the partition for a pivot to be chosen from.
      */    
     private static void quickSort(int[] array, int start, int end){
+        int pivot;
         if(end - start > 2){
             choosePivot(array, start, end);
-            int pivot = partition(array, start, end);
-            quickSort(array, 0, pivot);
+            pivot = partition(array, start, end);
+            quickSort(array, start, pivot);
             quickSort(array, pivot + 1, end);
         }else{
-            if(start - end == 2 && array[start] > array[end-1]){
+            if(end - start == 2 && array[start] > array[end - 1]){
                 int swap = array[start];
-                array[start] = array[end-1];
-                array[end-1] = swap;
+                array[start] = array[end - 1];
+                array[end - 1] = swap;
             }
         }
     }
@@ -50,8 +51,10 @@ public class QuickSort {
      * @param end The end index (not inclusive) of the partition for a pivot to be chosen from.
      */
     private static void choosePivot(int[] array, int start, int end){
-        int mid = (end-start)/2;
+        int mid = start + (end - start)/2;
+        // System.out.println(mid);
         int pivot = medianOfThree(array, start, mid, end-1);
+        System.out.println(pivot);
         int pivotSwap = array[pivot];
         array[pivot] = array[start];
         array[start] = pivotSwap;
@@ -81,6 +84,7 @@ public class QuickSort {
         }
         array[start] = array[bigStart - 1];
         array[bigStart - 1] = pivot;
+        System.out.println(arrayToString(array));
         return bigStart - 1;
     }
     
@@ -95,18 +99,18 @@ public class QuickSort {
      */
     private static int medianOfThree(int[] array, int a, int b, int c){
         int median = 0;
-        if(a == b && b != c){
+        if(array[a] == array[b] && array[b] != array[c]){
             median = a;
-        }else if(c == b && b != a){
+        }else if(array[c] == array[b] && array[b] != array[a]){
             median = c;
         }
         int max = Math.max(Math.max(array[a],array[b]),array[c]);
         int min = Math.min(Math.min(array[a],array[b]),array[c]);
-        if(a < max && a > min){
+        if(array[a] < max && array[a] > min){
             median = a;
-        }else if(b < max && b > min){
+        }else if(array[b] < max && array[b] > min){
             median = b;
-        }else if(c < max && c > min){
+        }else if(array[c] < max && array[c] > min){
             median = c;
         }
         return median;
