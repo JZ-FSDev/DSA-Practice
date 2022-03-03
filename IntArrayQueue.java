@@ -12,16 +12,27 @@ public class IntArrayQueue {
     private static final int MAX_SIZE = 100;
 
     private int end;
+    private int front;
     private int[] ququeArray;
 
     public static void main(String[] args) {
-
-
+        IntArrayQueue quque = new IntArrayQueue();
+        System.out.println(quque);
+        quque.enquque(2);
+        System.out.println(quque);
+        quque.enquque(3);
+        System.out.println(quque);
+        System.out.println("dequque: " + quque.dequque());
+        System.out.println("dequque: " + quque.dequque());
+        System.out.println("dequque: " + quque.dequque());
+        System.out.println(quque.end + " " + quque.front);
+        System.out.println(quque);
     }
 
     public IntArrayQueue(){
         ququeArray = new int[MAX_SIZE];
         end = -1;
+        front = 0;
     }
 
     public void enquque(int value){
@@ -29,17 +40,15 @@ public class IntArrayQueue {
             System.out.println("Enquque failed due to maximal capacity reached");
         }else{
             ququeArray[++end] = value;
+            end %= ququeArray.length;
         }
     }
 
     public int dequque(){
         int val = -1;
-        if(end != -1){
-            val = ququeArray[0];
-            for(int i = 1; i <= end; i++){
-                ququeArray[i - 1] = ququeArray[i];
-            }
-            end--;
+        if(front <= end){
+            val = ququeArray[front++];
+            front %= ququeArray.length;
         }
         return val;
     }
@@ -49,8 +58,8 @@ public class IntArrayQueue {
     }
 
     /**
-     * Returns a String representation of this Stack with [ as the bottom of the stack
-     * and > as the top of the stack.
+     * Returns a String representation of this Quque as < ... < with the front of the quque
+     * where the array heads point towards.
      * 
      * @return The String representation of this Stack.
      */
@@ -58,8 +67,8 @@ public class IntArrayQueue {
     public String toString(){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("< ");
-        if(end >= 0 ){
-            for(int i = 0; i <= end; i++){
+        if(end >= 0){
+            for(int i = front; i != end; i = (i + 1) % ququeArray.length){
                 stringBuilder.append(ququeArray[i]);
                 if(i != end){
                     stringBuilder.append(",");
