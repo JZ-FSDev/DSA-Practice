@@ -15,6 +15,9 @@ public class IntArrayQueue {
     private int front;
     private int[] ququeArray;
 
+    /**
+     * Tests the functionality of the quque.
+     */
     public static void main(String[] args) {
         IntArrayQueue quque = new IntArrayQueue();
         System.out.println(quque);
@@ -58,18 +61,22 @@ public class IntArrayQueue {
         System.out.println("dequque: " + quque.dequque());
         System.out.println(quque.front + " " + quque.end);
         System.out.println(quque);     
-        // System.out.println("dequque: " + quque.dequque());
-        // System.out.println("dequque: " + quque.dequque());
-        // System.out.println(quque.front + " " + quque.end);
-        // System.out.println(quque);
     }
 
+    /**
+     * Creates a new quque.
+     */
     public IntArrayQueue(){
         ququeArray = new int[MAX_SIZE];
         end = -1;
         front = 0;
     }
 
+    /**
+     * Adds the specified int to the end of the quque.
+     * 
+     * @param value The value to be added to the end of the quque.
+     */
     public void enquque(int value){
         if(isFull()){
             System.out.println("Enquque failed due to maximal capacity reached");
@@ -79,6 +86,11 @@ public class IntArrayQueue {
         }
     }
 
+    /**
+     * Removes and returns the int at the beginning of the quque.
+     * 
+     * @return The int at the beginning of the quque.
+     */
     public int dequque(){
         int val = Integer.MIN_VALUE;
         if(front == end){
@@ -92,6 +104,11 @@ public class IntArrayQueue {
         return val;
     }
 
+    /**
+     * Returns true if this stack is full.
+     * 
+     * @return True if this stack is full.
+     */
     public boolean isFull(){
         return end != -1 && (end + 1) % ququeArray.length == front;
     }
