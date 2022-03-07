@@ -1,27 +1,36 @@
 /**
- * Defines a driver class to compare a self-made recursive insertion sort to 
- * the interative version to determine which is quicker
+ * Defines a industry-standard quick sort.
  *
  * @author JZ-FSDev
  * @since 17.0.1
  * @version 0.0.1
  */
+public class QuickSort {
+
     /**
      * Calls the private helper method to recursively quick sort the specified int
-     * array. Prints out the time elapsed.
+     * array.
      * 
      * @param array The int array to be recursively quick sorted.
      */
     public static void quickSort(int[] array) {
-        quickSort(array, 0, array.length);
+        if (array != null && array.length > 1) {
+            if (array.length == 2) {
+                if (array[0] > array[1]) {
+                    swap(array, 0, 1);
+                }
+            } else {
+                quickSort(array, 0, array.length);
+            }
+        }
     }
 
     /**
      * Helper method to recursively quick sort the specified int array from the
-     * specified bounds of start (inclusive) to end (not inclusive) by picking a 
-     * pivot between start and end and partitioning the region.  Calls the method
-     * again on the region to the left and right of the partition until the array
-     * is sorted.
+     * specified bounds of start (inclusive) to end (not inclusive) by picking a
+     * pivot between start and end and partitioning the region. Calls the method
+     * again on the region to the left and right of the partition (if one exists)
+     * until the array is sorted.
      * 
      * @param array The int array to be recursively quick sorted.
      * @param start The beginning index (inclusive) of the partition for a pivot to
@@ -30,11 +39,9 @@
      *              chosen from.
      */
     private static void quickSort(int[] array, int start, int end) {
-        int pivot;
-
         if (end - start > 2) {
             medianOfThreePivot(array, start, end);
-            pivot = partition(array, start, end);
+            int pivot = partition(array, start, end);
             quickSort(array, start, pivot);
             quickSort(array, pivot + 1, end);
         } else {
@@ -47,7 +54,7 @@
     /**
      * Partitions the specified array from the specified start (inclusive) to end
      * (not inclusive) by arranging all the elements less than the pivot to the
-     * right of the pivot and leaving the elements greater or equal to the right of
+     * left of the pivot and leaving the elements greater or equal to the right of
      * the pivot. Returns the final position of the pivot after the partition is
      * complete.
      * 
@@ -59,15 +66,12 @@
      * @return The final position of the pivot after the partition is complete.
      */
     private static int partition(int[] array, int start, int end) {
-        int current;
         int pivot = array[start];
         int bigStart = start + 1;
 
-        for (current = start + 1; current < end; current++) {
-            if (array[current] < pivot) {
-                int smallSwap = array[current];
-                array[current] = array[bigStart];
-                array[bigStart] = smallSwap;
+        for (int i = start + 1; i < end; i++) {
+            if (array[i] < pivot) {
+                swap(array, i, bigStart);
                 bigStart++;
             }
         }
@@ -79,7 +83,7 @@
     /**
      * Chooses a pivot by chosing the median of the specified start (inclusive), end
      * (not inclusive), and middle index between start and end. Swaps the selected
-     * pivot to the specified start index.
+     * pivot with the element at the specified start index.
      * 
      * @param array The array to have the pivot picked.
      * @param start The beginning index (inclusive) of the region of array to have a
@@ -88,18 +92,19 @@
      *              pivot picked.
      */
     private static void medianOfThreePivot(int[] array, int start, int end) {
-        int mid = (start + end) / 2;
-
-        if (array[end - 1] > array[mid]) {
-            swap(array, end - 1, mid);
-        }
-        if (array[end - 1] > array[start]) {
-            swap(array, end - 1, start);
-        }
-        if (array[mid] > array[start]) {
+        if (end - start > 2) {
+            int mid = (start + end) / 2;
+            if (array[end - 1] > array[mid]) {
+                swap(array, end - 1, mid);
+            }
+            if (array[end - 1] > array[start]) {
+                swap(array, end - 1, start);
+            }
+            if (array[mid] > array[start]) {
+                swap(array, mid, start);
+            }
             swap(array, mid, start);
         }
-        swap(array, mid, start);
     }
 
     /**
