@@ -95,4 +95,21 @@ public class MSDRadixSort {
             }
         }
     }
+    
+    /**
+     * Returns the number of digits from the specified int.
+     * 
+     * @param number The int to have its number of digits determined.
+     * @return The number of digits of the specified int.
+     */
+    private static int getNumDigits(int number) {
+        int numDigits;
+
+        if (number == 0) {
+            numDigits = 1;
+        } else {
+            numDigits = (int) Math.log10(number) + 1;
+        }
+        return numDigits;
+    }    
 }
