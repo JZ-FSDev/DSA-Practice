@@ -111,5 +111,22 @@ public class MSDRadixSort {
             numDigits = (int) Math.log10(number) + 1;
         }
         return numDigits;
+    }
+    
+    /**
+     * Returns the largest number from the specified int array.
+     * 
+     * @param array The int array to have the largest number found.
+     * @return The largest number from the specified int array.
+     */
+    private static int getLargestNumber(int[] array) {
+        int largestNumber = array[0];
+
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > largestNumber) {
+                largestNumber = array[i];
+            }
+        }
+        return largestNumber;
     }    
 }
