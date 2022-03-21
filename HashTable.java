@@ -54,4 +54,38 @@ public class HashTable {
         }
         return node;
     }
+    
+        /**
+     * 
+     * 
+     * @param variableName
+     * @param newValue
+     */
+    public void insert(String variableName, int newValue){
+        int index = hashFunction(variableName);
+        Node curr = table[index];
+        if(curr == null){
+            table[index] = new Node(newValue, variableName, null);
+        }else{
+            while(curr.next != null){
+                curr = curr.next;
+            }
+            curr.next = new Node(newValue, variableName, null);
+        }
+    }
+
+    /**
+     * Prints the entire hash table along with its elements.
+     */
+    public void printVariables(){
+        for(int i = 0; i < SIZE; i++){
+            String s = "Index " + i + ": ";
+            Node curr = table[i];
+            while(curr != null){
+                s += " key: " + curr.key + " " + " item: " + curr.item;
+                curr = curr.next;
+            }
+            System.out.println(s);
+        }
+    }
 }
