@@ -29,4 +29,29 @@ public class HashTable {
 
         return hash;
     }
+    
+        public int polynomialHashCode(String key) {
+        int hash = key.charAt(0);
+        for(int i = 0; i < key.length() - 1; i++){
+            hash = (hash * PRIME + key.charAt(i + 1)) % SIZE;
+        }
+        return hash;
+    }
+
+    public Node search(String variableName){
+        Node node = null;
+        int index = hashFunction(variableName);
+        if(table[index] != null){
+            Node curr = table[index];
+            boolean found = false;
+            while(curr != null && !found){
+                if(curr.key.equals(variableName)){
+                    node = curr;
+                    found = true;
+                }
+                curr = curr.next;
+            }
+        }
+        return node;
+    }
 }
