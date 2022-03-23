@@ -129,5 +129,27 @@ public class BinaryTree {
                 twoChildrenDelete(curr, prev);
             }
         }
+    }
+    
+    private void twoChildrenDelete(Node curr, Node prev){
+        Node isCurr = curr.right;
+        Node isPrev = curr;
+        while(isCurr.left != null){
+            isPrev = isCurr;
+            isCurr = isCurr.left;
+        }
+        if(curr == isPrev){ // just right of key inorder successor
+            if(prev != null){
+                prev.left = isCurr;
+            }else{
+                root = isCurr;
+            }
+            isCurr.left = curr.left;
+        }else{ // right and left most of key inorder successor
+            isPrev.left = isCurr.right;
+            prev.left = isCurr;
+            isCurr.left = curr.left;
+            isCurr.right = curr.right;
+        }
     }    
 }
