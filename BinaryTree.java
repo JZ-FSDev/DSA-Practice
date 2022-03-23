@@ -41,4 +41,19 @@ public class BinaryTree {
             }
         }
     }
+    
+    public boolean search(int key){
+        Node curr = root;
+        boolean found = false;
+        while(curr != null && !found){
+            if(key == curr.item){
+                found = true;
+            }else if(key > curr.item){
+                curr = curr.right;
+            }else{
+                curr = curr.left;
+            }
+        }
+        return found;
+    }    
 }
