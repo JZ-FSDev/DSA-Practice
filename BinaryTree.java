@@ -151,5 +151,41 @@ public class BinaryTree {
             isCurr.left = curr.left;
             isCurr.right = curr.right;
         }
+    }
+    
+    public void preOrderPrint(Node curr){
+        if(curr != null){
+            System.out.println(curr.item);
+            if(curr.left != null){
+                preOrderPrint(curr.left);
+            }
+            if(curr.right != null){
+                preOrderPrint(curr.right);
+            }
+        }
+    }
+
+    public void inOrderPrint(Node curr){
+        if(curr != null){
+            if(curr.left != null){
+                inOrderPrint(curr.left);
+            }
+            System.out.println(curr.item);
+            if(curr.right != null){
+                inOrderPrint(curr.right);
+            }
+        }
+    }
+
+    public void postOrderPrint(Node curr){
+        if(curr != null){
+            if(curr.left != null){
+                postOrderPrint(curr.left);
+            }
+            if(curr.right != null){
+                postOrderPrint(curr.right);
+            }
+            System.out.println(curr.item);
+        }
     }    
 }
