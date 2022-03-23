@@ -67,5 +67,26 @@ public class BinaryTree {
             }
         }
         return found;
+    }
+    
+    public void insertRecursive(Node prev, Node curr, int item){
+        if(curr != null){
+            if(item < curr.item){
+                insertRecursive(curr, curr.left, item);
+            }else{
+                insertRecursive(curr, curr.right, item);
+            }
+        }else{
+            if(root == null){
+                root = new Node(item);
+            }else{
+                Node node = new Node(item);
+                if(item > prev.item){
+                    prev.right = node;
+                }else{
+                    prev.left = node;
+                }
+            }
+        }
     }    
 }
