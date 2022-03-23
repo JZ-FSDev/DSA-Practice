@@ -88,5 +88,46 @@ public class BinaryTree {
                 }
             }
         }
+    }
+    
+    public void delete(int key){
+        Node prev = null;
+        Node curr = root;
+        boolean found = false;
+        while(curr != null && !found){
+            if(key == curr.item){
+                found = true;
+            }else if(key > curr.item){
+                prev = curr;
+                curr = curr.right;
+            }else{
+                prev = curr;
+                curr = curr.left;
+            }
+        }
+        if(found){
+            if(curr.left == null && curr.right == null){ // leaf case
+                if(prev == null){
+                    root = null; 
+                }else if(prev.left != null && prev.left.item == key){
+                    prev.left = null;
+                }else{
+                    prev.right = null;
+                }
+            }else if(curr.left == null && curr.right != null){ // one right child case
+                if(prev == null){
+                    root = curr.right;
+                }else{
+                    prev.right = curr.right;
+                }
+            }else if(curr.right == null && curr.left != null){ // one left child case
+                if(prev == null){
+                    root = curr.left;
+                }
+                prev.left = curr.left;
+            }else{ // two child case
+                twoChildrenDelete(curr, prev);
+            }
+        }
     }    
 }
