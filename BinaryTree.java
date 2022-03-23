@@ -56,4 +56,16 @@ public class BinaryTree {
         }
         return found;
     }    
+  
+    public boolean searchRecursive(Node curr, int key){
+        boolean found = (key == curr.item);
+        if((curr.left != null || curr.right != null) && !found){
+            if(key > curr.item){
+                found = searchRecursive(curr.right, key);
+            }else{
+                found = searchRecursive(curr.left, key);
+            }
+        }
+        return found;
+    }    
 }
