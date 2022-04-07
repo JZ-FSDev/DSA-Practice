@@ -1,6 +1,6 @@
 /**
  * Defines a hash table implemented using Nodes with separate chaining
- * to resolve collisions.  Horner's method used to generate polynomial 
+ * to resolve collisions. Horner's method used to generate polynomial
  * hash code.
  *
  * @author JZ-FSDev
@@ -27,39 +27,25 @@ public class HashTable {
     /**
      * Creates a new hash table of SIZE elements.
      */
-    public HashTable(){
+    public HashTable() {
         table = new Node[SIZE];
     }
 
     /**
-     * Converts the specified key into its polynomial hash code using
+     * Converts the specified string into its polynomial hash code using
      * Horner's method if the key is larger than one character.
      * 
-     * @param key The key to be converted into its hash code.
-     * @return The hash code of the key.
+     * @param string The String to be converted into its hash code.
+     * @return The hash code of the given string.
      */
-    public int hashFunction(String key){
+    public int hashFunction(String string) {
         int hash = 0;
-        if(key.length() > 1){
-            hash = hornerMethod(key);
-        }else{
-            hash = Integer.parseInt(key) % SIZE;
-        }
 
-        return hash;
-    }
-
-    /**
-     * Converts the specified key into its polynomial hash code using
-     * Horner's method.
-     * 
-     * @param key The key to be converted into its hash code.
-     * @return The hash code of the key.
-     */
-    private int hornerMethod(String key) {
-        int hash = key.charAt(0);
-        for(int i = 0; i < key.length() - 1; i++){
-            hash = (hash * PRIME + key.charAt(i + 1)) % SIZE;
+        if (string.length() > 1) {
+            hash = (int) string.charAt(0);
+            for (int i = 0; i < string.length() - 1; i++) {
+                hash = (hash * PRIME + string.charAt(i + 1)) % SIZE;
+            }
         }
         return hash;
     }
@@ -71,14 +57,14 @@ public class HashTable {
      * @param key The key to of the Node to be searched for.
      * @return Returns the the Node with the matching specified key.
      */
-    public Node search(String key){
+    public Node search(String key) {
         Node node = null;
         int index = hashFunction(key);
-        if(table[index] != null){
+        if (table[index] != null) {
             Node curr = table[index];
             boolean found = false;
-            while(curr != null && !found){
-                if(curr.key.equals(key)){
+            while (curr != null && !found) {
+                if (curr.key.equals(key)) {
                     node = curr;
                     found = true;
                 }
@@ -92,16 +78,16 @@ public class HashTable {
      * Inserts a new entry into the hash table of specified String key and its
      * associated int item value.
      * 
-     * @param key The key of the new entry.
+     * @param key      The key of the new entry.
      * @param newValue The int value of the new entry.
      */
-    public void insert(String key, int newValue){
+    public void insert(String key, int newValue) {
         int index = hashFunction(key);
         Node curr = table[index];
-        if(curr == null){
+        if (curr == null) {
             table[index] = new Node(newValue, key, null);
-        }else{
-            while(curr.next != null){
+        } else {
+            while (curr.next != null) {
                 curr = curr.next;
             }
             curr.next = new Node(newValue, key, null);
@@ -111,11 +97,11 @@ public class HashTable {
     /**
      * Prints the entire hash table along with its elements.
      */
-    public void printVariables(){
-        for(int i = 0; i < SIZE; i++){
+    public void printVariables() {
+        for (int i = 0; i < SIZE; i++) {
             String s = "Index " + i + ": ";
             Node curr = table[i];
-            while(curr != null){
+            while (curr != null) {
                 s += " key: " + curr.key + " " + " item: " + curr.item;
                 curr = curr.next;
             }
