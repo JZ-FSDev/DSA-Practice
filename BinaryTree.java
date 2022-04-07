@@ -1,3 +1,10 @@
+/**
+ * Defines a Binary Tree with its basic operations.
+ *
+ * @author JZ-FSDev
+ * @since 17.0.1
+ * @version 0.0.1
+ */
 public class BinaryTree {
     
     public class Node {
@@ -14,10 +21,18 @@ public class BinaryTree {
 
     private Node root;
 
+    /**
+     * Creates a new Binary Tree.
+     */
     public BinaryTree(){
         root = null;
     }
 
+    /**
+     * Inserts the specified item into this Binary Tree.
+     * 
+     * @param item The int to be added to the Binary Tree.
+     */
     public void insert(int item){
         if(root == null){
             root = new Node(item);
@@ -41,7 +56,14 @@ public class BinaryTree {
             }
         }
     }
-    
+
+    /**
+     * Searches for the specified key in this Binary Tree and returns
+     * true if it is found.
+     * 
+     * @param key The int to be searched for.
+     * @return True if the specified key is found in this Binary Tree.
+     */
     public boolean search(int key){
         Node curr = root;
         boolean found = false;
@@ -55,20 +77,50 @@ public class BinaryTree {
             }
         }
         return found;
-    }    
-  
-    public boolean searchRecursive(Node curr, int key){
-        boolean found = (key == curr.item);
-        if((curr.left != null || curr.right != null) && !found){
-            if(key > curr.item){
-                found = searchRecursive(curr.right, key);
+    }
+
+    /**
+     * Searches for the Node containing the specified key in this Binary 
+     * Tree and returns it if it is found.  Returns null if not found.
+     * 
+     * @param key The int of a Node to be searched for.
+     * @return The Node containing the specified key.
+     */
+    public Node searchNode(int key){
+        Node curr = root;
+        boolean found = false;
+        while(curr != null && !found){
+            if(key == curr.item){
+                found = true;
+            }else if(key > curr.item){
+                curr = curr.right;
             }else{
-                found = searchRecursive(curr.left, key);
+                curr = curr.left;
+            }
+        }
+        return curr;
+    }
+
+    /**
+     * Searches for the Node containing the specified key in this Binary 
+     * Tree and returns it if it is found.  Returns null if not found.
+     * 
+     * @param root The root of this Binary Tree.
+     * @param key The int of a Node to be searched for.
+     * @return The Node containing the specified key.
+     */
+    public boolean searchRecursive(Node root, int key){
+        boolean found = (key == root.item);
+        if((root.left != null || root.right != null) && !found){
+            if(key > root.item){
+                found = searchRecursive(root.right, key);
+            }else{
+                found = searchRecursive(root.left, key);
             }
         }
         return found;
     }
-    
+
     public void insertRecursive(Node prev, Node curr, int item){
         if(curr != null){
             if(item < curr.item){
@@ -89,7 +141,7 @@ public class BinaryTree {
             }
         }
     }
-    
+
     public void delete(int key){
         Node prev = null;
         Node curr = root;
@@ -130,7 +182,7 @@ public class BinaryTree {
             }
         }
     }
-    
+
     private void twoChildrenDelete(Node curr, Node prev){
         Node isCurr = curr.right;
         Node isPrev = curr;
@@ -152,7 +204,7 @@ public class BinaryTree {
             isCurr.right = curr.right;
         }
     }
-    
+
     public void preOrderPrint(Node curr){
         if(curr != null){
             System.out.println(curr.item);
@@ -187,5 +239,5 @@ public class BinaryTree {
             }
             System.out.println(curr.item);
         }
-    }    
+    }
 }
