@@ -121,6 +121,13 @@ public class BinaryTree {
         return found;
     }
 
+    /**
+     * Inserts the given item into this Binary Tree.
+     * 
+     * @param prev Pointer to the node previous to the current Node.
+     * @param curr The root of the Binary Tree.
+     * @param item The int to be inserted.
+     */
     public void insertRecursive(Node prev, Node curr, int item){
         if(curr != null){
             if(item < curr.item){
@@ -142,6 +149,11 @@ public class BinaryTree {
         }
     }
 
+    /**
+     * Deletes the given key from this Binary Tree.
+     * 
+     * @param key The int to be deleted.
+     */
     public void delete(int key){
         Node prev = null;
         Node curr = root;
@@ -183,6 +195,12 @@ public class BinaryTree {
         }
     }
 
+    /**
+     * Deletes the Node that has two children.
+     * 
+     * @param curr The Node to delete.
+     * @param prev The Node previous to the current Node.
+     */
     private void twoChildrenDelete(Node curr, Node prev){
         Node isCurr = curr.right;
         Node isPrev = curr;
@@ -205,6 +223,11 @@ public class BinaryTree {
         }
     }
 
+    /**
+     * Prints all the items in this Binary Tree in pre-order format.
+     * 
+     * @param curr The root of the Binary Tree.
+     */
     public void preOrderPrint(Node curr){
         if(curr != null){
             System.out.println(curr.item);
@@ -217,6 +240,11 @@ public class BinaryTree {
         }
     }
 
+    /**
+     * Prints all the items in this Binary Tree in in-order format.
+     * 
+     * @param curr The root of the Binary Tree.
+     */
     public void inOrderPrint(Node curr){
         if(curr != null){
             if(curr.left != null){
@@ -229,6 +257,11 @@ public class BinaryTree {
         }
     }
 
+    /**
+     * Prints all the items in this Binary Tree in post-order format.
+     * 
+     * @param curr The root of the Binary Tree.
+     */
     public void postOrderPrint(Node curr){
         if(curr != null){
             if(curr.left != null){
