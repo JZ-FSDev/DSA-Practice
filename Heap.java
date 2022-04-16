@@ -111,4 +111,12 @@ public class Heap {
         }
         return valid;
     }
+
+    private void increaseHeapSize(){
+        int[] temp = new int[(int)(heapSize * 1.5)];
+        for(int i = 0; i < heapSize; i++){
+            temp[i] = heap[i];
+        }
+        heap = temp;
+    }
 }
