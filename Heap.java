@@ -15,7 +15,9 @@ public class Heap {
         heap.insert(35);
         heap.insert(25);
         heap.print();
-        System.out.println(heap.isValid(0));
+        heap.deleteMax();
+        heap.print();
+        
     }
 
     public Heap() {
@@ -39,7 +41,40 @@ public class Heap {
 
     public int deleteMax() {
         int max = Integer.MIN_VALUE;
-
+        if(heapSize == 1){
+            max = heap[0];
+            heapSize--;
+        }else if(heapSize > 1){
+            max = heap[0];
+            heap[0] = heap[heapSize - 1];
+            int parent = 0;
+            int leftChild = 2 * parent + 1;
+            int rightChild = 2 * parent + 2;
+            while(leftChild < heapSize || rightChild < heapSize){
+                if(leftChild < heapSize && rightChild < heapSize){
+                    if(heap[leftChild] > heap[rightChild] && heap[leftChild] > heap[parent]){
+                        swap(parent, leftChild);
+                        parent = leftChild;
+                    }else if(heap[rightChild] > heap[leftChild] && heap[rightChild] > heap[parent]){
+                        swap(parent, rightChild);
+                        parent = rightChild;
+                    }
+                }else if(leftChild < heapSize){
+                    if(heap[leftChild] > heap[rightChild] && heap[leftChild] > heap[parent]){
+                        swap(parent, leftChild);
+                        parent = leftChild;
+                    }
+                }else{
+                    if(heap[rightChild] > heap[leftChild] && heap[rightChild] > heap[parent]){
+                        swap(parent, rightChild);
+                        parent = rightChild;
+                    }
+                }
+                leftChild = 2 * parent + 1;
+                rightChild = 2 * parent + 2;
+            }
+            heapSize--;
+        }
         return max;
     }
 
@@ -53,6 +88,7 @@ public class Heap {
         for (int i = 0; i < heapSize; i++) {
             System.out.print(heap[i] + " ");
         }
+        System.out.println();
     }
 
     public boolean isValid(int parentIndex){
