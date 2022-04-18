@@ -6,7 +6,7 @@
  * @version 0.0.1
  */
 public class BinaryTree {
-    
+
     public class Node {
         public int item;
         public Node right;
@@ -17,14 +17,41 @@ public class BinaryTree {
             right = null;
             left = null;
         }
+
+        private int numberOfNodes(Node curr) {
+            int num = 0;
+            if (curr != null) {
+                num++;
+                if (curr.left != null) {
+                    num += numberOfNodes(curr.left);
+                }
+                if (curr.right != null) {
+                    num += numberOfNodes(curr.right);
+                }
+            }
+            return num;
+        }
     }
 
     private Node root;
 
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree();
+        tree.insert(6);
+        tree.insert(4);
+        tree.insert(1);
+        tree.insert(7);
+        tree.insert(3);
+        tree.insert(5);
+        tree.insert(2);
+        // tree.preOrderPrint(tree.root);
+        System.out.println(tree.root.numberOfNodes(tree.root));
+    }
+
     /**
      * Creates a new Binary Tree.
      */
-    public BinaryTree(){
+    public BinaryTree() {
         root = null;
     }
 
@@ -33,25 +60,25 @@ public class BinaryTree {
      * 
      * @param item The int to be added to the Binary Tree.
      */
-    public void insert(int item){
-        if(root == null){
+    public void insert(int item) {
+        if (root == null) {
             root = new Node(item);
-        }else{
+        } else {
             Node node = new Node(item);
             Node curr = root;
             Node prev = root;
-            while(curr != null){
-                if(item < curr.item){
+            while (curr != null) {
+                if (item < curr.item) {
                     prev = curr;
                     curr = curr.left;
-                }else{
+                } else {
                     prev = curr;
                     curr = curr.right;
                 }
             }
-            if(item > prev.item){
+            if (item > prev.item) {
                 prev.right = node;
-            }else{
+            } else {
                 prev.left = node;
             }
         }
@@ -64,15 +91,15 @@ public class BinaryTree {
      * @param key The int to be searched for.
      * @return True if the specified key is found in this Binary Tree.
      */
-    public boolean search(int key){
+    public boolean search(int key) {
         Node curr = root;
         boolean found = false;
-        while(curr != null && !found){
-            if(key == curr.item){
+        while (curr != null && !found) {
+            if (key == curr.item) {
                 found = true;
-            }else if(key > curr.item){
+            } else if (key > curr.item) {
                 curr = curr.right;
-            }else{
+            } else {
                 curr = curr.left;
             }
         }
@@ -80,21 +107,21 @@ public class BinaryTree {
     }
 
     /**
-     * Searches for the Node containing the specified key in this Binary 
-     * Tree and returns it if it is found.  Returns null if not found.
+     * Searches for the Node containing the specified key in this Binary
+     * Tree and returns it if it is found. Returns null if not found.
      * 
      * @param key The int of a Node to be searched for.
      * @return The Node containing the specified key.
      */
-    public Node searchNode(int key){
+    public Node searchNode(int key) {
         Node curr = root;
         boolean found = false;
-        while(curr != null && !found){
-            if(key == curr.item){
+        while (curr != null && !found) {
+            if (key == curr.item) {
                 found = true;
-            }else if(key > curr.item){
+            } else if (key > curr.item) {
                 curr = curr.right;
-            }else{
+            } else {
                 curr = curr.left;
             }
         }
@@ -102,19 +129,19 @@ public class BinaryTree {
     }
 
     /**
-     * Searches for the Node containing the specified key in this Binary 
-     * Tree and returns it if it is found.  Returns null if not found.
+     * Searches for the Node containing the specified key in this Binary
+     * Tree and returns it if it is found. Returns null if not found.
      * 
      * @param root The root of this Binary Tree.
-     * @param key The int of a Node to be searched for.
+     * @param key  The int of a Node to be searched for.
      * @return The Node containing the specified key.
      */
-    public boolean searchRecursive(Node root, int key){
+    public boolean searchRecursive(Node root, int key) {
         boolean found = (key == root.item);
-        if((root.left != null || root.right != null) && !found){
-            if(key > root.item){
+        if ((root.left != null || root.right != null) && !found) {
+            if (key > root.item) {
                 found = searchRecursive(root.right, key);
-            }else{
+            } else {
                 found = searchRecursive(root.left, key);
             }
         }
@@ -128,21 +155,21 @@ public class BinaryTree {
      * @param curr The root of the Binary Tree.
      * @param item The int to be inserted.
      */
-    public void insertRecursive(Node prev, Node curr, int item){
-        if(curr != null){
-            if(item < curr.item){
+    public void insertRecursive(Node prev, Node curr, int item) {
+        if (curr != null) {
+            if (item < curr.item) {
                 insertRecursive(curr, curr.left, item);
-            }else{
+            } else {
                 insertRecursive(curr, curr.right, item);
             }
-        }else{
-            if(root == null){
+        } else {
+            if (root == null) {
                 root = new Node(item);
-            }else{
+            } else {
                 Node node = new Node(item);
-                if(item > prev.item){
+                if (item > prev.item) {
                     prev.right = node;
-                }else{
+                } else {
                     prev.left = node;
                 }
             }
@@ -154,42 +181,42 @@ public class BinaryTree {
      * 
      * @param key The int to be deleted.
      */
-    public void delete(int key){
+    public void delete(int key) {
         Node prev = null;
         Node curr = root;
         boolean found = false;
-        while(curr != null && !found){
-            if(key == curr.item){
+        while (curr != null && !found) {
+            if (key == curr.item) {
                 found = true;
-            }else if(key > curr.item){
+            } else if (key > curr.item) {
                 prev = curr;
                 curr = curr.right;
-            }else{
+            } else {
                 prev = curr;
                 curr = curr.left;
             }
         }
-        if(found){
-            if(curr.left == null && curr.right == null){ // leaf case
-                if(prev == null){
-                    root = null; 
-                }else if(prev.left != null && prev.left.item == key){
+        if (found) {
+            if (curr.left == null && curr.right == null) { // leaf case
+                if (prev == null) {
+                    root = null;
+                } else if (prev.left != null && prev.left.item == key) {
                     prev.left = null;
-                }else{
+                } else {
                     prev.right = null;
                 }
-            }else if(curr.left == null && curr.right != null){ // one right child case
-                if(prev == null){
+            } else if (curr.left == null && curr.right != null) { // one right child case
+                if (prev == null) {
                     root = curr.right;
-                }else{
+                } else {
                     prev.right = curr.right;
                 }
-            }else if(curr.right == null && curr.left != null){ // one left child case
-                if(prev == null){
+            } else if (curr.right == null && curr.left != null) { // one left child case
+                if (prev == null) {
                     root = curr.left;
                 }
                 prev.left = curr.left;
-            }else{ // two child case
+            } else { // two child case
                 twoChildrenDelete(curr, prev);
             }
         }
@@ -201,21 +228,21 @@ public class BinaryTree {
      * @param curr The Node to delete.
      * @param prev The Node previous to the current Node.
      */
-    private void twoChildrenDelete(Node curr, Node prev){
+    private void twoChildrenDelete(Node curr, Node prev) {
         Node isCurr = curr.right;
         Node isPrev = curr;
-        while(isCurr.left != null){
+        while (isCurr.left != null) {
             isPrev = isCurr;
             isCurr = isCurr.left;
         }
-        if(curr == isPrev){ // just right of key inorder successor
-            if(prev != null){
+        if (curr == isPrev) { // just right of key inorder successor
+            if (prev != null) {
                 prev.left = isCurr;
-            }else{
+            } else {
                 root = isCurr;
             }
             isCurr.left = curr.left;
-        }else{ // right and left most of key inorder successor
+        } else { // right and left most of key inorder successor
             isPrev.left = isCurr.right;
             prev.left = isCurr;
             isCurr.left = curr.left;
@@ -228,13 +255,13 @@ public class BinaryTree {
      * 
      * @param curr The root of the Binary Tree.
      */
-    public void preOrderPrint(Node curr){
-        if(curr != null){
+    public void preOrderPrint(Node curr) {
+        if (curr != null) {
             System.out.println(curr.item);
-            if(curr.left != null){
+            if (curr.left != null) {
                 preOrderPrint(curr.left);
             }
-            if(curr.right != null){
+            if (curr.right != null) {
                 preOrderPrint(curr.right);
             }
         }
@@ -245,13 +272,13 @@ public class BinaryTree {
      * 
      * @param curr The root of the Binary Tree.
      */
-    public void inOrderPrint(Node curr){
-        if(curr != null){
-            if(curr.left != null){
+    public void inOrderPrint(Node curr) {
+        if (curr != null) {
+            if (curr.left != null) {
                 inOrderPrint(curr.left);
             }
             System.out.println(curr.item);
-            if(curr.right != null){
+            if (curr.right != null) {
                 inOrderPrint(curr.right);
             }
         }
@@ -262,12 +289,12 @@ public class BinaryTree {
      * 
      * @param curr The root of the Binary Tree.
      */
-    public void postOrderPrint(Node curr){
-        if(curr != null){
-            if(curr.left != null){
+    public void postOrderPrint(Node curr) {
+        if (curr != null) {
+            if (curr.left != null) {
                 postOrderPrint(curr.left);
             }
-            if(curr.right != null){
+            if (curr.right != null) {
                 postOrderPrint(curr.right);
             }
             System.out.println(curr.item);
