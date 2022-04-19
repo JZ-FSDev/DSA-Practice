@@ -31,5 +31,12 @@ public class Graph {
         graph.addEdge(1, 2);
 
         graph.print();
+    }
+    
+    public void addEdge(int from, int to) {
+        adjacencyList.get(from).add(to);
+        adjacencyList.get(from).add(to);
+        adjacencyMatrix.get(from).set(to, true);
+        adjacencyMatrix.get(to).set(from, true);
     }    
 }
