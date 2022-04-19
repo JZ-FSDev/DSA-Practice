@@ -39,4 +39,36 @@ public class Graph {
         adjacencyMatrix.get(from).set(to, true);
         adjacencyMatrix.get(to).set(from, true);
     }    
+    
+    public void print() {
+        System.out.println("List:");
+        for (int i = 0; i < adjacencyList.size(); i++) {
+            System.out.println("\nVertex " + i + ":");
+            for (int j = 0; j < adjacencyList.get(i).size(); j++) {
+                System.out.print(" -> " + adjacencyList.get(i).get(j));
+            }
+        }
+        System.out.print("\n\nMatrix:\n");
+        System.out.print("    ");
+        for(int i = 0; i < numVertices; i++){
+            System.out.print(i + " ");
+        }
+        System.out.println();
+        System.out.print("   ");
+        for(int i = 0; i < numVertices; i++){
+            System.out.print("__");
+        }
+        System.out.println();
+        for (int i = 0; i < adjacencyMatrix.size(); i++) {
+            System.out.print(i + " | ");
+            for (int j = 0; j < adjacencyMatrix.get(i).size(); j++) {
+                if(adjacencyMatrix.get(i).get(j) == false){
+                    System.out.print("0 ");
+                }else{
+                    System.out.print("1 ");
+                }
+            }
+            System.out.println();
+        }
+    }    
 }
