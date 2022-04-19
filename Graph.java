@@ -89,7 +89,17 @@ public class Graph {
             System.out.println();
         }
         return prev;
-    }            
+    }
+  
+    private boolean exists(ArrayList<Integer> list, int item) {
+        boolean exists = false;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) == item) {
+                exists = true;
+            }
+        }
+        return exists;
+    }    
     
     public void print() {
         System.out.println("List:");
