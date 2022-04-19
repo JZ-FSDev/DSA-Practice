@@ -69,7 +69,27 @@ public class Graph {
             prev = new int[numVertices];
             stack.push(vertex);
             verticesVisited.add(vertex);
-            System.out.print(vertex);    
+            System.out.print(vertex);
+            while (!stack.isEmpty()) {
+                boolean added = false;
+                int prevPeek = stack.peek();
+                for (int i = 0; i < adjacencyList.get(prevPeek).size() && !added; i++) {
+                    if (!exists(verticesVisited, adjacencyList.get(prevPeek).get(i))) {
+                        prev[adjacencyList.get(prevPeek).get(i)] = prevPeek;
+                        stack.push(adjacencyList.get(prevPeek).get(i));
+                        verticesVisited.add(stack.peek());
+                        System.out.print(stack.peek());
+                        added = true;
+                    }
+                }
+                if (!added) {
+                    stack.pop();
+                }
+            }
+            System.out.println();
+        }
+        return prev;
+    }            
     
     public void print() {
         System.out.println("List:");
