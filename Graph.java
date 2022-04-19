@@ -34,11 +34,30 @@ public class Graph {
     }
     
     public void addEdge(int from, int to) {
-        adjacencyList.get(from).add(to);
-        adjacencyList.get(from).add(to);
+        orderedInsert(adjacencyList.get(from), to);
+        orderedInsert(adjacencyList.get(to), from);
+
         adjacencyMatrix.get(from).set(to, true);
         adjacencyMatrix.get(to).set(from, true);
-    }    
+    }
+
+    private void orderedInsert(ArrayList<Integer> list, int item) {
+        int index = -1;
+        if (list.size() > 0) {
+            for (int i = 0; i < list.size() && index == -1; i++) {
+                if (list.get(i) > item) {
+                    index = i;
+                }
+            }
+            if (index == -1) {
+                list.add(item);
+            } else {
+                list.add(index, item);
+            }
+        } else {
+            list.add(item);
+        }
+    } 
     
     public void print() {
         System.out.println("List:");
