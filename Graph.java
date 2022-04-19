@@ -57,7 +57,19 @@ public class Graph {
         } else {
             list.add(item);
         }
-    } 
+    }
+    
+    public int[] depthFirstTraversalPrint(int vertex) {
+        System.out.println();
+        ArrayList<Integer> verticesVisited = new ArrayList<Integer>();
+        int[] prev = null;
+        if (vertex < numVertices && vertex >= 0) {
+            System.out.print("Depth First Traversal: ");
+            Stack<Integer> stack = new Stack<Integer>();
+            prev = new int[numVertices];
+            stack.push(vertex);
+            verticesVisited.add(vertex);
+            System.out.print(vertex);    
     
     public void print() {
         System.out.println("List:");
