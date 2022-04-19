@@ -109,7 +109,21 @@ public class Graph {
             Queue<Integer> queue = new LinkedList<Integer>();
             queue.add(vertex);
             System.out.print(vertex);
-            verticesVisited.add(vertex);    
+            verticesVisited.add(vertex);
+            while (!queue.isEmpty()) {
+                int dequeue = queue.remove();
+                for (int i = 0; i < adjacencyList.get(dequeue).size(); i++) {
+                    if (!exists(verticesVisited, adjacencyList.get(dequeue).get(i))) {
+                        queue.add(adjacencyList.get(dequeue).get(i));
+                        verticesVisited.add(adjacencyList.get(dequeue).get(i));
+                        System.out.print(adjacencyList.get(dequeue).get(i));
+                    }
+                }
+            }
+            System.out.println();
+        }
+
+    }            
     
     public void print() {
         System.out.println("List:");
