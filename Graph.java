@@ -99,7 +99,17 @@ public class Graph {
             }
         }
         return exists;
-    }    
+    }
+    
+    public void breadthFirstTraversalPrint(int vertex) {
+        System.out.println();
+        ArrayList<Integer> verticesVisited = new ArrayList<Integer>();
+        if (vertex < numVertices && vertex >= 0) {
+            System.out.print("Breadth First Traversal: ");
+            Queue<Integer> queue = new LinkedList<Integer>();
+            queue.add(vertex);
+            System.out.print(vertex);
+            verticesVisited.add(vertex);    
     
     public void print() {
         System.out.println("List:");
