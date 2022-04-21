@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 /**
  * Defines a Binary Tree with its basic operations.
  *
@@ -44,8 +46,7 @@ public class BinaryTree {
         tree.insert(3);
         tree.insert(5);
         tree.insert(2);
-        // tree.preOrderPrint(tree.root);
-        System.out.println(tree.root.numberOfNodes(tree.root));
+        System.out.println(tree.isValid(tree.root));
     }
 
     /**
@@ -249,6 +250,21 @@ public class BinaryTree {
             isCurr.right = curr.right;
         }
     }
+    
+    public boolean isValidBST(Node root) {
+        return isValidHelper(root, Long.MAX_VALUE, Long.MIN_VALUE);
+    }
+    
+    private boolean isValidHelper(Node root, long max, long min){
+        boolean result;
+        if(root == null ) result = true;
+
+        else if(root.item >= max || root.item <= min) result = false;
+
+        else result = isValidHelper(root.left, root.item, min) && isValidHelper(root.right, max, root.item);
+        
+        return result;
+    }
 
     /**
      * Prints all the items in this Binary Tree in pre-order format.
@@ -258,12 +274,8 @@ public class BinaryTree {
     public void preOrderPrint(Node curr) {
         if (curr != null) {
             System.out.println(curr.item);
-            if (curr.left != null) {
-                preOrderPrint(curr.left);
-            }
-            if (curr.right != null) {
-                preOrderPrint(curr.right);
-            }
+            preOrderPrint(curr.left);
+            preOrderPrint(curr.right);
         }
     }
 
@@ -274,13 +286,9 @@ public class BinaryTree {
      */
     public void inOrderPrint(Node curr) {
         if (curr != null) {
-            if (curr.left != null) {
-                inOrderPrint(curr.left);
-            }
+            inOrderPrint(curr.left);
             System.out.println(curr.item);
-            if (curr.right != null) {
-                inOrderPrint(curr.right);
-            }
+            inOrderPrint(curr.right);
         }
     }
 
@@ -291,12 +299,8 @@ public class BinaryTree {
      */
     public void postOrderPrint(Node curr) {
         if (curr != null) {
-            if (curr.left != null) {
-                postOrderPrint(curr.left);
-            }
-            if (curr.right != null) {
-                postOrderPrint(curr.right);
-            }
+            postOrderPrint(curr.left);
+            postOrderPrint(curr.right);
             System.out.println(curr.item);
         }
     }
