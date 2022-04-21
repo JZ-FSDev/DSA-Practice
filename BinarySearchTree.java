@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  * @since 17.0.1
  * @version 0.0.1
  */
-public class BinaryTree {
+public class BinarySearchTree {
 
     public class Node {
         public int item;
@@ -20,6 +20,13 @@ public class BinaryTree {
             left = null;
         }
 
+        /**
+         * Returns the number of nodes including the given node and all
+         * its descendants.
+         * 
+         * @param curr The node to begin counting from.
+         * @return The number of nodes including the given node and all its descendants.
+         */
         private int numberOfNodes(Node curr) {
             int num = 0;
             if (curr != null) {
@@ -38,7 +45,7 @@ public class BinaryTree {
     private Node root;
 
     public static void main(String[] args) {
-        BinaryTree tree = new BinaryTree();
+        BinarySearchTree tree = new BinarySearchTree();
         tree.insert(6);
         tree.insert(4);
         tree.insert(1);
@@ -46,13 +53,12 @@ public class BinaryTree {
         tree.insert(3);
         tree.insert(5);
         tree.insert(2);
-        System.out.println(tree.isValid(tree.root));
     }
 
     /**
      * Creates a new Binary Tree.
      */
-    public BinaryTree() {
+    public BinarySearchTree() {
         root = null;
     }
 
@@ -251,10 +257,25 @@ public class BinaryTree {
         }
     }
     
+    /**
+     * Returns true if this is a valid binary search tree from its root.
+     * 
+     * @param root The root of the binary search tree.
+     * @return True if this is a valid binary search tree from its root.
+     */
     public boolean isValidBST(Node root) {
         return isValidHelper(root, Long.MAX_VALUE, Long.MIN_VALUE);
     }
     
+    /**
+     * Helper method to check if the given root of the binary search tree
+     * is valid.
+     * 
+     * @param root The root of the binary search tree.
+     * @param max The maximum number a tree node can hold.
+     * @param min The minimum number a tree node can hold.
+     * @return True if this is a valid binary search tree from its root.
+     */
     private boolean isValidHelper(Node root, long max, long min){
         boolean result;
         if(root == null ) result = true;
