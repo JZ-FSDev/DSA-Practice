@@ -22,3 +22,23 @@ void printArray(int length, int array[])
     }
     printf("\n");
 }
+
+void arrayCopy(int arrayFrom[], int arrayTo[], int start, int end, int length)
+{
+    int count;
+    for (count = 0; count < length; count++)
+    {
+        arrayTo[start + count] = arrayFrom[start + count];
+    }
+}
+
+int main(int numParms, char *parms[])
+{
+    // int ans = sumEven(100);
+    // printf("The sum of evens is %d\n", ans);
+    int first[] = {1, 2, 3};
+    int second[] = {4, 5, 6};
+
+    printArray(3, first);
+    printArray(3, second);
+}
