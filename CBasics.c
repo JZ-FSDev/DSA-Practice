@@ -1,5 +1,18 @@
 #include <stdio.h>
 
+struct person{
+    int age;
+    char name[];
+};
+
+int equalPerson(struct person person1, struct person person2){
+    return person1.age == person2.age && person1.name == person2.name;
+}
+
+void printPerson(struct person person){
+    printf("Name: %d  Age: %d", person.name, person.age);
+}
+
 int sumEven(int max)
 {
     int sum = 0;
@@ -42,3 +55,5 @@ int main(int numParms, char *parms[])
     printArray(3, first);
     printArray(3, second);
 }
+
+
