@@ -1,11 +1,26 @@
 #include <stdio.h>
 #include <string.h>
 
+#define MAX_COUNT 100
+
 struct person
 {
     int age;
     char name[100];
 };
+
+typedef struct{
+    enum
+    {
+        intType,
+        doubleType
+    } tag;
+    union
+    {
+        int intValue;
+        double doubleValue;
+    } union1;
+}MY_STRUCT;
 
 typedef struct
 {
@@ -69,9 +84,8 @@ int main(int numParms, char *parms[])
     // printArray(3, first);
     // printArray(3, second);
 
-    int count = 5;
-    struct person persons[count];
-    for (int i = 0; i < count; i++)
+    struct person persons[MAX_COUNT];
+    for (int i = 0; i < MAX_COUNT; i++)
     {
         persons[i].age = i;
         char character[] = "moo";
@@ -82,8 +96,8 @@ int main(int numParms, char *parms[])
         printPerson(persons[i]);
     }
 
-    ball balls[count];
-    for (int i = 0; i < count; i++)
+    ball balls[MAX_COUNT];
+    for (int i = 0; i < MAX_COUNT; i++)
     {
         balls[i].size = i;
         printf("Ball size: %d\n", balls[i].size);
