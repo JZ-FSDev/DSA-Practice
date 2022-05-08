@@ -50,7 +50,9 @@ void arrayCopy(int arrayFrom[], int arrayTo[], int start, int end, int length)
     }
 }
 
-
+int ballBig(ball b){
+    return b.size > 2;
+}
 
 int main(int numParms, char *parms[])
 {
@@ -78,7 +80,21 @@ int main(int numParms, char *parms[])
     for(int i = 0; i < count; i++){
         balls[i].size = i;
         printf("Ball size: %d\n", balls[i].size);
+        printf("Ball is large: %d\n", ballBig(balls[i]));
     }
+
+    enum {FALSE, TRUE} boolean;
+    
+    boolean = FALSE;
+
+    if (boolean == FALSE){
+        printf("boolean value: %d", boolean);   
+    }else{
+        printf("boolean value: %d", boolean);
+    }
+
+
+
     // struct person person1;
     // struct person person2;
     // char personName1[] = "Jason";
@@ -91,5 +107,3 @@ int main(int numParms, char *parms[])
     // printPerson(person1);
     // printPerson(person2);
 }
-
-
