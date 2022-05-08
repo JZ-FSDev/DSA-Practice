@@ -6,6 +6,10 @@ struct person{
     char name[100];
 };
 
+typedef struct{
+    int size;
+}ball;
+
 int equalPerson(struct person person1, struct person person2){
     return person1.age == person2.age && person1.name == person2.name;
 }
@@ -58,18 +62,23 @@ int main(int numParms, char *parms[])
     // printArray(3, first);
     // printArray(3, second);
 
-    int count = 100;
+    int count = 5;
     struct person persons[count];
     for(int i = 0; i < count; i++){
         persons[i].age = i;
         char character[] = "moo";
         char temp[] = "cow";
-        strcpy(persons[i].name, strncat(character, temp, 3));
-    }
-    for(int i = 0; i < count; i++){
+        char filler[100];
+        strncat(filler, character, 3);
+        strcpy(persons[i].name, filler);
         printPerson(persons[i]);
     }
 
+    ball balls[count];
+    for(int i = 0; i < count; i++){
+        balls[i].size = i;
+        printf("Ball size: %d\n", balls[i].size);
+    }
     // struct person person1;
     // struct person person2;
     // char personName1[] = "Jason";
