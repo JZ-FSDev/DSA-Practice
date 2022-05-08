@@ -1,20 +1,24 @@
 #include <stdio.h>
 #include <string.h>
 
-struct person{
+struct person
+{
     int age;
     char name[100];
 };
 
-typedef struct{
+typedef struct
+{
     int size;
-}ball;
+} ball;
 
-int equalPerson(struct person person1, struct person person2){
+int equalPerson(struct person person1, struct person person2)
+{
     return person1.age == person2.age && person1.name == person2.name;
 }
 
-void printPerson(struct person person){
+void printPerson(struct person person)
+{
     printf("Name: %s  Age: %d\n", person.name, person.age);
 }
 
@@ -50,7 +54,8 @@ void arrayCopy(int arrayFrom[], int arrayTo[], int start, int end, int length)
     }
 }
 
-int ballBig(ball b){
+int ballBig(ball b)
+{
     return b.size > 2;
 }
 
@@ -66,7 +71,8 @@ int main(int numParms, char *parms[])
 
     int count = 5;
     struct person persons[count];
-    for(int i = 0; i < count; i++){
+    for (int i = 0; i < count; i++)
+    {
         persons[i].age = i;
         char character[] = "moo";
         char temp[] = "cow";
@@ -77,28 +83,40 @@ int main(int numParms, char *parms[])
     }
 
     ball balls[count];
-    for(int i = 0; i < count; i++){
+    for (int i = 0; i < count; i++)
+    {
         balls[i].size = i;
         printf("Ball size: %d\n", balls[i].size);
         printf("Ball is large: %d\n", ballBig(balls[i]));
     }
 
-    enum {FALSE, TRUE} boolean;
-    
+    enum
+    {
+        FALSE,
+        TRUE
+    } boolean;
+
     boolean = FALSE;
 
-    if (boolean == FALSE){
-        printf("boolean value: %d", boolean);   
-    }else{
+    if (boolean == FALSE)
+    {
+        printf("boolean value: %d", boolean);
+    }
+    else
+    {
         printf("boolean value: %d", boolean);
     }
 
-
+    union MY_UNION
+    {
+        int intValue;
+        double doubleValue;
+    };
+    union MY_UNION union1;
 
     // struct person person1;
     // struct person person2;
     // char personName1[] = "Jason";
-    
 
     // person1.age = 25;
     // strcpy(person1.name, "Jason");
