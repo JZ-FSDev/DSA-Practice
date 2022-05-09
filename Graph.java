@@ -108,6 +108,12 @@ public class Graph {
         return prev;
     }
 
+    public void dftRecursivePrint(int vertex){
+        boolean[] visited = new boolean[numVertices];
+        System.out.print("Depth First Traversal Recursive: ");
+        dftHelper(vertex, visited);
+    }
+
     private void dftHelper(int curr, boolean[] visited){
         visited[curr] = true;
         System.out.print(curr);
