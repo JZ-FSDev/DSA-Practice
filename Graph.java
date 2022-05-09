@@ -108,6 +108,16 @@ public class Graph {
         return prev;
     }
 
+    private void dftHelper(int curr, boolean[] visited){
+        visited[curr] = true;
+        System.out.print(curr);
+        for(int i = 0; i < adjacencyList.get(curr).size(); i++){
+            if(!visited[adjacencyList.get(curr).get(i)]){
+                dftHelper(adjacencyList.get(curr).get(i), visited);
+            }
+        }
+    }
+
     public void depthFirstPath(int start, int end){
         System.out.println("Depth First Path: ");
         int[] prev = depthFirstTraversalIterativePrint(start);
