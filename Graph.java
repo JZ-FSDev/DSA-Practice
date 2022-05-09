@@ -108,6 +108,18 @@ public class Graph {
         return prev;
     }
 
+    public void depthFirstPath(int start, int end){
+        System.out.println("Depth First Path: ");
+        int[] prev = depthFirstTraversalIterativePrint(start);
+        System.out.print(end + " <-- ");
+        int vertex = prev[end];
+        while(vertex != -1){
+            System.out.print(vertex + " <-- ");
+            vertex = prev[vertex];
+        }
+        System.out.println();
+    }
+
     private boolean exists(ArrayList<Integer> list, int item) {
         boolean exists = false;
         for (int i = 0; i < list.size(); i++) {
