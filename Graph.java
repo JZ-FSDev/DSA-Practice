@@ -10,7 +10,8 @@ public class Graph {
     private int numVertices;
 
     /**
-     * Creates a new graph of numVertices.
+     * Creates a new graph of numVertices.  Each vertex number corresponds to the
+     * index of the array (Vertices are numbers from 0 to n-1).
      * 
      * @param numVertices The number of vertices to instantiate the new graph as.
      */
@@ -56,7 +57,7 @@ public class Graph {
      * Adds a new edge between vertices from and to.
      * 
      * @param from One of the two vertices to be connected.
-     * @param to The other of the two vertices to be connected.
+     * @param to   The other of the two vertices to be connected.
      */
     public void addEdge(int from, int to) {
         orderedInsert(adjacencyList.get(from), to);
@@ -90,6 +91,16 @@ public class Graph {
         }
     }
 
+    /**
+     * Performs a depth first search from the given vertex iteratively
+     * and returns the previous vertices of each vertex visited as an array
+     * in the order they were visited during the search. Prints out the
+     * order the nodes were visited.
+     * 
+     * @param vertex The vertex to perform the depth first search from.
+     * @return Previous vertices of each vertex an array in the order they were
+     *         visited during the search.
+     */
     public int[] depthFirstTraversalIterativePrint(int vertex) {
         System.out.println();
         ArrayList<Integer> verticesVisited = new ArrayList<Integer>();
@@ -98,7 +109,7 @@ public class Graph {
             System.out.print("Depth First Traversal: ");
             Stack<Integer> stack = new Stack<Integer>();
             prev = new int[numVertices];
-            for(int i = 0; i < prev.length; i++){
+            for (int i = 0; i < prev.length; i++) {
                 prev[i] = -1;
             }
             stack.push(vertex);
@@ -125,28 +136,28 @@ public class Graph {
         return prev;
     }
 
-    public void dftRecursivePrint(int vertex){
+    public void dftRecursivePrint(int vertex) {
         boolean[] visited = new boolean[numVertices];
         System.out.print("Depth First Traversal Recursive: ");
         dftHelper(vertex, visited);
     }
 
-    private void dftHelper(int curr, boolean[] visited){
+    private void dftHelper(int curr, boolean[] visited) {
         visited[curr] = true;
         System.out.print(curr);
-        for(int i = 0; i < adjacencyList.get(curr).size(); i++){
-            if(!visited[adjacencyList.get(curr).get(i)]){
+        for (int i = 0; i < adjacencyList.get(curr).size(); i++) {
+            if (!visited[adjacencyList.get(curr).get(i)]) {
                 dftHelper(adjacencyList.get(curr).get(i), visited);
             }
         }
     }
 
-    public void depthFirstPath(int start, int end){
+    public void depthFirstPath(int start, int end) {
         System.out.println("Depth First Path: ");
         int[] prev = depthFirstTraversalIterativePrint(start);
         System.out.print(end + " <-- ");
         int vertex = prev[end];
-        while(vertex != -1){
+        while (vertex != -1) {
             System.out.print(vertex + " <-- ");
             vertex = prev[vertex];
         }
@@ -171,7 +182,7 @@ public class Graph {
             System.out.print("Breadth First Traversal: ");
             Queue<Integer> queue = new LinkedList<Integer>();
             prev = new int[numVertices];
-            for(int i = 0; i < prev.length; i++){
+            for (int i = 0; i < prev.length; i++) {
                 prev[i] = -1;
             }
             queue.add(vertex);
@@ -187,19 +198,19 @@ public class Graph {
                         System.out.print(adjacencyList.get(dequeue).get(i));
                     }
                 }
-                
+
             }
             System.out.println();
         }
         return prev;
     }
 
-    public void breadthFirstPath(int start, int end){
+    public void breadthFirstPath(int start, int end) {
         System.out.println("Breadth First Path: ");
         int[] prev = breadthFirstTraversalPrint(start);
         System.out.print(end + " <-- ");
         int vertex = prev[end];
-        while(vertex != -1){
+        while (vertex != -1) {
             System.out.print(vertex + " <-- ");
             vertex = prev[vertex];
         }
