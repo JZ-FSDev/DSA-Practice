@@ -9,6 +9,11 @@ public class Graph {
     private ArrayList<ArrayList<Boolean>> adjacencyMatrix;
     private int numVertices;
 
+    /**
+     * Creates a new graph of numVertices.
+     * 
+     * @param numVertices The number of vertices to instantiate the new graph as.
+     */
     public Graph(int numVertices) {
         this.numVertices = numVertices;
         adjacencyList = new ArrayList<ArrayList<Integer>>();
@@ -47,6 +52,12 @@ public class Graph {
         // graph.breadthFirstTraversalPrint(6);
     }
 
+    /**
+     * Adds a new edge between vertices from and to.
+     * 
+     * @param from One of the two vertices to be connected.
+     * @param to The other of the two vertices to be connected.
+     */
     public void addEdge(int from, int to) {
         orderedInsert(adjacencyList.get(from), to);
         orderedInsert(adjacencyList.get(to), from);
@@ -55,6 +66,12 @@ public class Graph {
         adjacencyMatrix.get(to).set(from, true);
     }
 
+    /**
+     * Inserts the given item into the given list in an ordered manner.
+     * 
+     * @param list The ArrayList of ints to be inserted into.
+     * @param item The int to insert into the list.
+     */
     private void orderedInsert(ArrayList<Integer> list, int item) {
         int index = -1;
         if (list.size() > 0) {
