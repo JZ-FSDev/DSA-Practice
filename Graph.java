@@ -137,12 +137,24 @@ public class Graph {
         return prev;
     }
 
+    /**
+     * Call the helper method to perform a depth first search from the given 
+     * vertex recursively and prints out the order the nodes were visited.
+     * 
+     * @param vertex The vertex to perform the depth first search from.
+     */
     public void dftRecursivePrint(int vertex) {
         boolean[] visited = new boolean[numVertices];
         System.out.print("Depth First Traversal Recursive: ");
         dftHelper(vertex, visited);
     }
 
+    /**
+     * Performs a depth first search from the given vertex recursively
+     * and prints out the order the nodes were visited.
+     * 
+     * @param vertex The vertex to perform the depth first search from.
+     */
     private void dftHelper(int curr, boolean[] visited) {
         visited[curr] = true;
         System.out.print(curr);
@@ -153,6 +165,13 @@ public class Graph {
         }
     }
 
+    /**
+     * Prints out the path from the given starting vertex to the ending
+     * vertex of a depth first search traversal.
+     * 
+     * @param start The starting vertex.
+     * @param end The ending vertex.
+     */
     public void depthFirstPath(int start, int end) {
         System.out.println("Depth First Path: ");
         int[] prev = depthFirstTraversalIterativePrint(start);
