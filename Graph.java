@@ -12,6 +12,7 @@ public class Graph {
     /**
      * Creates a new graph of numVertices.  Each vertex number corresponds to the
      * index of the array (Vertices are numbers from 0 to n-1).
+     * Stores the edge information in both an adjacency list and matrix.
      * 
      * @param numVertices The number of vertices to instantiate the new graph as.
      */
@@ -217,6 +218,9 @@ public class Graph {
         System.out.println();
     }
 
+    /**
+     * Prints out this graph as an adjacency matrix and list.
+     */
     public void print() {
         System.out.print("List:");
         for (int i = 0; i < adjacencyList.size(); i++) {
