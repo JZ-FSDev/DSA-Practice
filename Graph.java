@@ -235,6 +235,13 @@ public class Graph {
         return prev;
     }
 
+    /**
+     * Prints out the path from the given starting vertex to the ending
+     * vertex of a breadth first search traversal.
+     * 
+     * @param start The starting vertex.
+     * @param end The ending vertex.
+     */
     public void breadthFirstPath(int start, int end) {
         System.out.println("Breadth First Path: ");
         int[] prev = breadthFirstTraversalPrint(start);
