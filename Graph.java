@@ -194,6 +194,16 @@ public class Graph {
         return exists;
     }
 
+    /**
+     * Performs a breadth first search from the given vertex
+     * and returns the previous vertices of each vertex visited as an array
+     * in the order they were visited during the search. Prints out the
+     * order the nodes were visited.
+     * 
+     * @param vertex The vertex to perform the depth first search from.
+     * @return Previous vertices of each vertex an array in the order they were
+     *         visited during the search.
+     */    
     public int[] breadthFirstTraversalPrint(int vertex) {
         System.out.println();
         ArrayList<Integer> verticesVisited = new ArrayList<Integer>();
