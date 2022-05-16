@@ -31,8 +31,27 @@ public class Graph {
     }
 
     public static void main(String[] args) {
+        Graph graph = new Graph(9);
 
+        graph.addEdge(8, 2);
+        graph.addEdge(3, 2);
+        graph.addEdge(3, 4);
+        graph.addEdge(4, 6);
+        graph.addEdge(3, 1);
+        graph.addEdge(6, 1);
+        graph.addEdge(0, 6);
+        graph.addEdge(1, 0);
+        graph.addEdge(5, 2);
+        graph.addEdge(7, 5);
+        graph.addEdge(7, 1);
 
+        graph.printGraph();
+        graph.dftRecursivePrint(1);
+        graph.depthFirstTraversalIterativePrint(1);
+        graph.breadthFirstTraversalPrint(1);
+
+        graph.depthFirstPath(1, 5);
+        graph.breadthFirstPath(1, 5);
     }
 
     /**
