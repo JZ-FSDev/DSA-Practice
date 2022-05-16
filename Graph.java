@@ -32,26 +32,7 @@ public class Graph {
 
     public static void main(String[] args) {
 
-        Graph graph = new Graph(9);
 
-        graph.addEdge(8, 2);
-        graph.addEdge(3, 2);
-        graph.addEdge(3, 4);
-        graph.addEdge(4, 6);
-        graph.addEdge(3, 1);
-        graph.addEdge(6, 1);
-        graph.addEdge(0, 6);
-        graph.addEdge(1, 0);
-        graph.addEdge(5, 2);
-        graph.addEdge(7, 5);
-        graph.addEdge(7, 1);
-
-        graph.print();
-        graph.dftRecursivePrint(1);
-        graph.depthFirstTraversalIterativePrint(1);
-        // graph.breadthFirstTraversalPrint(0);
-        // graph.depthFirstTraversalIterativePrint(2);
-        // graph.breadthFirstTraversalPrint(6);
     }
 
     /**
@@ -104,7 +85,7 @@ public class Graph {
      */
     public int[] depthFirstTraversalIterativePrint(int vertex) {
         System.out.println();
-        ArrayList<Integer> verticesVisited = new ArrayList<Integer>();
+        boolean[] verticesVisited = new boolean[numVertices];
         int[] prev = null;
         if (vertex < numVertices && vertex >= 0) {
             System.out.print("Depth First Traversal: ");
@@ -114,16 +95,16 @@ public class Graph {
                 prev[i] = -1;
             }
             stack.push(vertex);
-            verticesVisited.add(vertex);
+            verticesVisited[vertex] = true;
             System.out.print(vertex);
             while (!stack.isEmpty()) {
                 boolean added = false;
                 int prevPeek = stack.peek();
                 for (int i = 0; i < adjacencyList.get(prevPeek).size() && !added; i++) {
-                    if (!exists(verticesVisited, adjacencyList.get(prevPeek).get(i))) {
+                    if (!verticesVisited[adjacencyList.get(prevPeek).get(i)]) {
                         prev[adjacencyList.get(prevPeek).get(i)] = prevPeek;
                         stack.push(adjacencyList.get(prevPeek).get(i));
-                        verticesVisited.add(stack.peek());
+                        verticesVisited[stack.peek()] = true;
                         System.out.print(stack.peek());
                         added = true;
                     }
@@ -184,16 +165,6 @@ public class Graph {
         System.out.println();
     }
 
-    private boolean exists(ArrayList<Integer> list, int item) {
-        boolean exists = false;
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) == item) {
-                exists = true;
-            }
-        }
-        return exists;
-    }
-
     /**
      * Performs a breadth first search from the given vertex
      * and returns the previous vertices of each vertex visited as an array
@@ -206,7 +177,7 @@ public class Graph {
      */    
     public int[] breadthFirstTraversalPrint(int vertex) {
         System.out.println();
-        ArrayList<Integer> verticesVisited = new ArrayList<Integer>();
+        boolean[] verticesVisited = new boolean[numVertices];
         int[] prev = null;
         if (vertex < numVertices && vertex >= 0) {
             System.out.print("Breadth First Traversal: ");
@@ -217,15 +188,15 @@ public class Graph {
             }
             queue.add(vertex);
             System.out.print(vertex);
-            verticesVisited.add(vertex);
+            verticesVisited[vertex] = true;
             while (!queue.isEmpty()) {
                 int dequeue = queue.remove();
-                for (int i = 0; i < adjacencyList.get(dequeue).size(); i++) {
-                    if (!exists(verticesVisited, adjacencyList.get(dequeue).get(i))) {
-                        prev[adjacencyList.get(dequeue).get(i)] = dequeue;
-                        queue.add(adjacencyList.get(dequeue).get(i));
-                        verticesVisited.add(adjacencyList.get(dequeue).get(i));
-                        System.out.print(adjacencyList.get(dequeue).get(i));
+                for(int i : adjacencyList.get(dequeue)){
+                    if(!verticesVisited[i]){
+                        prev[i] = dequeue;
+                        queue.add(i);
+                        verticesVisited[i] = true;
+                        System.out.print(i);
                     }
                 }
 
@@ -257,35 +228,37 @@ public class Graph {
     /**
      * Prints out this graph as an adjacency matrix and list.
      */
-    public void print() {
-        System.out.print("List:");
+    public void printGraph() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("List:");
         for (int i = 0; i < adjacencyList.size(); i++) {
-            System.out.println("\nVertex " + i + ":");
+            stringBuilder.append("\nVertex " + i + ":");
             for (int j = 0; j < adjacencyList.get(i).size(); j++) {
-                System.out.print(" -> " + adjacencyList.get(i).get(j));
+                stringBuilder.append(" -> " + adjacencyList.get(i).get(j));
             }
         }
-        System.out.print("\n\nMatrix:\n");
-        System.out.print("    ");
+        stringBuilder.append("\n\nMatrix:\n");
+        stringBuilder.append("    ");
         for (int i = 0; i < numVertices; i++) {
-            System.out.print(i + " ");
+            stringBuilder.append(i + " ");
         }
-        System.out.println();
-        System.out.print("   ");
+        stringBuilder.append("\n");
+        stringBuilder.append("   ");
         for (int i = 0; i < numVertices; i++) {
-            System.out.print("__");
+            stringBuilder.append("__");
         }
-        System.out.println();
+        stringBuilder.append("\n");
         for (int i = 0; i < adjacencyMatrix.size(); i++) {
-            System.out.print(i + " | ");
+            stringBuilder.append(i + " | ");
             for (int j = 0; j < adjacencyMatrix.get(i).size(); j++) {
-                if (adjacencyMatrix.get(i).get(j) == false) {
-                    System.out.print("0 ");
+                if (!adjacencyMatrix.get(i).get(j)) {
+                    stringBuilder.append("0 ");
                 } else {
-                    System.out.print("1 ");
+                    stringBuilder.append("1 ");
                 }
             }
-            System.out.println();
+            stringBuilder.append("\n");
         }
+        System.out.print(stringBuilder.toString());
     }
 }
