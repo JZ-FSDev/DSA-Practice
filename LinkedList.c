@@ -26,3 +26,19 @@ void insertAscended(int thisNum){
         if(prev == NULL){
             top = toLink;
         }else{
+            if(toLink -> num < top -> num){
+                toLink -> next = top;
+                top = toLink;
+            }else{
+                curr = prev -> next;
+                while(curr != NULL && toLink -> num > curr -> num){
+                    prev = prev -> next;
+                    curr = curr -> next;
+                }
+                prev -> next = toLink;
+                toLink -> next = curr;
+            }
+        }
+        numNodes++;
+    }
+}
