@@ -42,3 +42,14 @@ void insertAscended(int thisNum){
         numNodes++;
     }
 }
+
+int removeLastItem(){
+    Node *prev = top;
+    Node *curr = NULL;
+    int deleted = 0;
+
+    // Precondition
+    validateList();
+
+    if(prev != NULL){
+        curr = prev -> next;
