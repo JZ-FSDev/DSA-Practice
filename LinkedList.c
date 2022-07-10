@@ -53,3 +53,12 @@ int removeLastItem(){
 
     if(prev != NULL){
         curr = prev -> next;
+
+        if(curr == NULL){
+            top = NULL;
+            free(prev);
+        }else{
+            while(curr -> next != NULL){
+                prev = prev -> next;
+                curr = curr -> next;
+            }
