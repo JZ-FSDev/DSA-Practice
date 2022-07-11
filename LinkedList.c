@@ -62,3 +62,15 @@ int removeLastItem(){
                 prev = prev -> next;
                 curr = curr -> next;
             }
+            prev -> next = NULL;
+            free(curr);
+        }
+        numNodes--;
+        deleted = 1;
+    }
+
+    // Postcondition
+    validateList();
+
+    return deleted;
+}
