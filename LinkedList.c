@@ -74,3 +74,24 @@ int removeLastItem(){
 
     return deleted;
 }
+
+int removeFirst(){
+    int result = 0;
+    Node *temp;
+
+    // Precondition
+    validateList();
+
+    if(top != NULL){
+        temp = top;
+        top = top -> next;
+        free(temp);
+        numNodes--;
+        result = 1;
+    }
+
+    // Postcondition
+    validateList();
+
+    return result;
+}
