@@ -95,3 +95,14 @@ int removeFirst(){
 
     return result;
 }
+
+void validateList(){
+    #ifndef NDEBUG
+        Node *prev = top;
+        Node *curr = NULL;
+        int count = 0;
+
+        if(numNodes == 0){
+            assert(top == NULL);
+        }else if(prev != NULL){
+            curr = prev -> next;
