@@ -106,3 +106,20 @@ void validateList(){
             assert(top == NULL);
         }else if(prev != NULL){
             curr = prev -> next;
+            count = 1;
+            if(curr != NULL){
+                count++;
+                assert(prev -> num < curr -> num);
+
+                while(curr -> next != NULL){
+                    prev = prev -> next;
+                    curr = curr -> next;
+                    count++;
+
+                    assert(prev -> num < curr -> num);
+                }
+            }
+            assert(count == numNodes);
+        }
+    #endif
+}
