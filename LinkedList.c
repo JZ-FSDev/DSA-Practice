@@ -123,3 +123,12 @@ void validateList(){
         }
     #endif
 }
+
+void printList(){
+    Node *curr = top;
+    for(int i = 0; i < numNodes; i++){
+        printf("%d \n", curr -> num);
+        curr = curr -> next;
+    }
+    printf("\n");
+}
